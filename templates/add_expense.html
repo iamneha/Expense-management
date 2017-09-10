@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block body %}
+<table>
+  <tbody>
+    <h2>Add your expense</h2>
+    <tr>
+    <td><div class="control-group">
+        <div class="controls">
+          Description: <input type="text" id="description" class="form-control" value="{{ request.form.Description }}">
+        </div>
+    </div></td>
+
+    <td><div class="control-group">
+        <div class="controls">
+          Food: <input type="number" step="0.01" id="food" class="form-control" value="{{ request.form.food }}">
+        </div>
+    </div></td>
+
+    <td><div class="control-group">
+        <div class="controls">
+          Accomodation: <input type="number" step="0.01" id="food" class="form-control" value="{{ request.form.accomodation }}">
+        </div>
+    </div></td>
+
+    <td><div class="control-group">
+        <div class="controls">
+          Entertainment : <input type="number" step="0.01" id="food" class="form-control" value="{{ request.form.entertainment }}">
+        </div>
+    </div></td>
+
+    <td><div class="control-group">
+        <div class="controls">
+          Grocery: <input type="number" step="0.01" id="food" class="form-control" value="{{ request.form.grocery }}">
+        </div>
+    </div></td>
+
+    <td><div class="control-group">
+        <div class="controls">
+          Travel: <input type="number" step="0.01" id="food" class="form-control" value="{{ request.form.travel }}">
+        </div>
+    </div></td>
+
+    <td><div class="control-group">
+        <div class="controls">
+          Clothes: <input type="number" step="0.01" id="food" class="form-control" value="{{ request.form.clothes }}">
+        </div>
+    </div></td>
+    </tr>
+    <tr>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-success">Add</button>
+        </div>
+    </div>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
