@@ -1,54 +1,55 @@
 {% extends "layout.html" %}
 {% block body %}
-  <form action="" method=post class="form-horizontal">
+  <form action="{{ url_for('show_expense') }}" method=post class="form-horizontal">
+  {{ 'form.hidden_tag()' }}
     <h2>Create New Todo</h2>
     <div class="control-group">
         <div class="controls">
-          <input type="text" id="description" name="Description" class="form-control" placeholder="Description" value="{{ request.form.description }}"
+          <input type="text" id="description" name="description" class="form-control" placeholder="Description" value="{{ request.form.description }}"
             required>
         </div>
     </div>
  
     <div class="control-group">
         <div class="controls">
-          <input type="number" step="0.01" id="food" class="form-control" placeholder="Food" value="{{ request.form.food }}">
+          <input type="number" step="0.01" id="food" name="food" class="form-control" placeholder="Food" value="{{ request.form.food }}">
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
-          <input type="number" step="0.01" id="accomodation" class="form-control" placeholder="Accomodation" value="{{ request.form.accomodation }}">
+          <input type="number" step="0.01" id="accomodation" name="accomodation" class="form-control" placeholder="Accomodation" value="{{ request.form.accomodation }}">
         </div>
     </div>
  
     <div class="control-group">
         <div class="controls">
-          <input type="number" step="0.01" id="entertainment" class="form-control" placeholder="Entertainment" value="{{ request.form.entertainment }}">
+          <input type="number" step="0.01" id="entertainment" name="entertainment" class="form-control" placeholder="Entertainment" value="{{ request.form.entertainment }}">
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
-          <input type="number" step="0.01" id="grocery" class="form-control" placeholder="Grocery" value="{{ request.form.grocery }}">
+          <input type="number" step="0.01" id="grocery" name="grocery" class="form-control" placeholder="Grocery" value="{{ request.form.grocery }}">
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
-          <input type="number" step="0.01" id="travel" class="form-control" placeholder="Travel" value="{{ request.form.travel }}">
+          <input type="number" step="0.01" id="travel" name="travel" class="form-control" placeholder="Travel" value="{{ request.form.travel }}">
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
-          <input type="number" step="0.01" id="clothes" class="form-control" placeholder="Clothes" value="{{ request.form.clothes }}">
+          <input type="number" step="0.01" id="clothes" name="clothes" class="form-control" placeholder="Clothes" value="{{ request.form.clothes }}">
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
           <button type="submit" class="btn btn-success">Create</button>
-          <a href="{{ url_for('show_expense') }}">Cancel</a>
+          <button class="btn btn-success"><a href="{{ url_for('show_expense') }}">Cancel</a></button>
         </div>
     </div>
   </form>

@@ -1,26 +1,41 @@
-<!DOCTYPE html>
-<html ng-app>
-  <head>
-    <meta charset="utf-8">
-    <title>MyFlaskApp</title>
-    <style>
-    body {
-      padding-top: 60px;
-      padding-bottom: 100px;
-      }
-    </style>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <link type="text/javascript" src="static/js/angular.min.js">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
-  <body>
-  <center>
-      {% include 'navbar.html' %}
-      <div class="container">
-        {% block body %}{% endblock %}
-      </div>
-  </center>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script type="text/javascript"></script>
-  </body>
-</html>
+<!doctype html>
+<title>TodoApp -- Store your Todo items</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+body {
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+</style>
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+ 
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse"
+                    data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+                <a class="brand" href="/">ManageExpense</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/show_expense">Expense</a></li>
+                        <li><a href="/login">Login</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+</div>
+<div id="main" class="container">
+    {% block body %}{% endblock %}
+    <hr>
+    <footer id="footer">   
+    </footer>
+</div>
