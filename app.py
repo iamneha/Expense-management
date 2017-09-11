@@ -52,9 +52,9 @@ class User(db.Model):
         return '<User %r>' % (self.username)
 
 
-class ExpenseCategory(db.Model):
+class Expense(db.Model):
     __tablename__ = 'expense_category'
-    id = db.Column('item_id', db.Integer, primary_key=True)
+    id = db.Column('table_id', db.Integer, primary_key=True)
     description = db.Column(db.String(200))
     food = db.Column(db.Integer)
     accomodation = db.Column(db.Integer)
@@ -62,9 +62,9 @@ class ExpenseCategory(db.Model):
     grocery = db.Column(db.Integer)
     travel = db.Column(db.Integer)
     clothes = db.Column(db.Integer)
-    date = db.Column(db.DateTime)
+    pub_date = db.Column(db.DateTime)
 
-    def __init__(self, description, food, accomodation, entertainment, grocery, travel, clothes, others, date=None):
+    def __init__(self, description, food, accomodation, entertainment, grocery, travel, clothes):
         self.description = description
         self.food = food
         self.accomodation = accomodation
@@ -72,7 +72,8 @@ class ExpenseCategory(db.Model):
         self.grocery = grocery
         self.travel = travel
         self.clothes = clothes
-        self.date = datetime.utcnow()
+        self.pub_date = datetime.utcnow()
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -114,10 +115,16 @@ def logout():
     return redirect(url_for('login'))
 
 
+@app.route('/show_expense')
+def show_expense():
+    return render_template('show_expense.html',
+        expense_category=Expense.query.order_by(Expense.pub_date.desc()).all()
+    )
+
 @app.route('/new_expense', methods=['GET', 'POST'])
 def new_expense():
     if request.method == 'POST':
-        new_expense = ExpenseCategory(
+        expense_category = Expense(
             request.form['description'],
             request.form['food'],
             request.form['accomodation'],
@@ -126,18 +133,10 @@ def new_expense():
             request.form['travel'],
             request.form['clothes']
         )
-        db.session.add(new_expense)
+        db.session.add(expense_category)
         db.session.commit()
         return redirect(url_for('show_expense'))
     return render_template('new_expense.html')
-
-
-@app.route('/show_expense', methods=['GET', 'POST'])
-def show_expense():
-    return render_template('show_expense.html',
-                           new_expenses=ExpenseCategory.query.order_by(
-                               ExpenseCategory.id.desc()).all()
-                           )
 
 
 if __name__ == "__main__":
