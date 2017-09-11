@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form action="" method=post class="form-horizontal">
+    <h2>Create New Todo</h2>
+    <div class="control-group">
+        <div class="controls">
+          <input type="text" id="description" name="Description" class="form-control" placeholder="Description" value="{{ request.form.description }}"
+            required>
+        </div>
+    </div>
+ 
+    <div class="control-group">
+        <div class="controls">
+          <input type="number" step="0.01" id="food" class="form-control" placeholder="Food" value="{{ request.form.food }}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <input type="number" step="0.01" id="accomodation" class="form-control" placeholder="Accomodation" value="{{ request.form.accomodation }}">
+        </div>
+    </div>
+ 
+    <div class="control-group">
+        <div class="controls">
+          <input type="number" step="0.01" id="entertainment" class="form-control" placeholder="Entertainment" value="{{ request.form.entertainment }}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <input type="number" step="0.01" id="grocery" class="form-control" placeholder="Grocery" value="{{ request.form.grocery }}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <input type="number" step="0.01" id="travel" class="form-control" placeholder="Travel" value="{{ request.form.travel }}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <input type="number" step="0.01" id="clothes" class="form-control" placeholder="Clothes" value="{{ request.form.clothes }}">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-success">Create</button>
+          <a href="{{ url_for('show_expense') }}">Cancel</a>
+        </div>
+    </div>
+  </form>
+{% endblock %}

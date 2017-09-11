@@ -111,16 +111,23 @@ def logout():
 	session.pop('logged_in', None)
 	return redirect(url_for('login'))
 
-@app.route('/add_expense',methods=['GET','POST'])
-def add_expense():
+@app.route('/new_expense',methods=['GET','POST'])
+def new_expense():
 	if request.method == 'POST':
-		update_expense = ExpenseCategory(request.form['description'], request.form['food'], request.form['accomodation'],
+		new_expense = ExpenseCategory(request.form['description'], request.form['food'], request.form['accomodation'],
 										request.form['entertainment'], request.form['grocery'], request.form['travel'],request.form['clothes'])
-		db.session.add(update_expense)
+		db.session.add(new_expense)
 		db.session.commit()
-		flash('Added successfully')
-		return redirect(url_for('index'))
-	return render_template('add_expense.html')
+		return redirect(url_for('show_expense'))
+	return render_template('new_expense.html')
+
+
+@app.route('/show_expense')
+def show_expense():
+	return render_template('show_expense.html',
+		new_expenses = ExpenseCategory.query.order_by(ExpenseCategory.date.desc()).all()
+	)
+
 
 if __name__ == "__main__":
     app.run()
