@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import render_template, request, url_for, redirect, session, flash
-from flask_login import LoginManager, login_user
+from flask import render_template, request, url_for, g, redirect, session, flash
+from flask_login import LoginManager, login_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import Flask
@@ -62,18 +62,23 @@ class Expense(db.Model):
     grocery = db.Column(db.Integer)
     travel = db.Column(db.Integer)
     clothes = db.Column(db.Integer)
+    total = db.Column(db.Integer)
     pub_date = db.Column(db.DateTime)
 
     def __init__(self, description, food, accomodation, entertainment, grocery, travel, clothes):
-        self.description = description
-        self.food = food
-        self.accomodation = accomodation
-        self.entertainment = entertainment
-        self.grocery = grocery
-        self.travel = travel
-        self.clothes = clothes
+        self.description = self.check_empty(description)
+        self.food = self.check_empty(food)
+        self.accomodation = self.check_empty(accomodation)
+        self.entertainment = self.check_empty(entertainment)
+        self.grocery = self.check_empty(grocery)
+        self.travel = self.check_empty(travel)
+        self.clothes = self.check_empty(clothes)
         self.pub_date = datetime.utcnow()
 
+    def check_empty(self, string):
+        if string:
+            return string
+        return 0
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -92,6 +97,9 @@ def register():
 def load_user(id):
     return User.query.get(id)
 
+@app.before_request
+def before_request():
+    g.user = current_user
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -106,7 +114,7 @@ def login():
         return redirect(url_for('login'))
     login_user(registered_user)
     flash('Logged in successfully')
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(url_for('index'))
 
 
 @app.route('/logout')

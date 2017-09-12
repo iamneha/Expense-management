@@ -22,8 +22,9 @@
         <td>{{ item.entertainment }}
         <td>{{ item.grocery }}
         <td>{{ item.travel }}
-        <td>{{ item.clothes}}</td>        
-      {%- endfor %}
+        <td>{{ item.clothes}}<td>
+        {% endfor %}
+        <td>{{ total }}</td>
     </table>
     <p>
       <a href="{{ url_for('new_expense') }}" class="btn btn-large btn-primary">New item</a>
